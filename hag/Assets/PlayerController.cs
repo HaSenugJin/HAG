@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
     //복사할 원본
     public GameObject BulletPrefad;
 
+    //복제할 FX 원본
+    public GameObject fxPrefab;
+
+    public GameObject[] stageBack = new GameObject[7];
+
     //복제된 총알의 저장공간
     private List<GameObject> Bullets = new List<GameObject>();
 
@@ -39,7 +44,6 @@ public class PlayerController : MonoBehaviour
         //player의 SpriteRenderer을 받아옴.
         playerRenderer = this.GetComponent<SpriteRenderer>();
     }
-
     void Start()
     {
         //속도를 초기화(5.0f)
@@ -51,8 +55,12 @@ public class PlayerController : MonoBehaviour
         onJumpU = false;
 
         Direction = 1.0f;
-    }
 
+        for(int i=0;i<7; ++i)
+        {
+            stageBack[i] = GameObject.Find(i.ToString());
+        }
+    }
     void Update()
     {
         //GetAxis = -1 ~ +1 사이의 값을 반환
@@ -97,6 +105,10 @@ public class PlayerController : MonoBehaviour
             BulletController Controller = Obj.AddComponent<BulletController>();
             //총알 스크립트 내부의 방향 변수를 현재 플레이어의 방향 변수로 설정한다.
             Controller.Direction = new Vector3(Direction, 0.0f, 0.0f);
+
+            //총알 스크립트 내부의 FX Prefab을 설정
+            Controller.fxPrefab = fxPrefab;
+
             //총알의 SpriteRenderer를 받아온다.
             SpriteRenderer renderer = Obj.GetComponent<SpriteRenderer>();
             //총알의 이미지 반전 상태를 플레이어의 이미지 반전 상태로 설정한다.
@@ -108,7 +120,8 @@ public class PlayerController : MonoBehaviour
         //플레이어의 움직임에 따라 이동모션을 출력한다.
         animator.SetFloat("Speed", Hor);
         //실제 플레이어를 움직인다.
-        transform.position += Movemont;
+
+        //transform.position += Movemont;
     }
 
     void OnAttack()
@@ -138,7 +151,6 @@ public class PlayerController : MonoBehaviour
         onRoll = true;
         animator.SetTrigger("Roll");
     }
-
     void OnJumpU()
     {
         if (onJumpU)
@@ -162,10 +174,8 @@ public class PlayerController : MonoBehaviour
     {
         onRoll = false;
     }
-
     private void SetJumpU()
     {
         onJumpU = false;
     }
-
 }
