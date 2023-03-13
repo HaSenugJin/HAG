@@ -23,10 +23,10 @@ public class PlayerController : MonoBehaviour
     private bool onJumpU;
 
     //복사할 원본
-    public GameObject BulletPrefad;
+    private GameObject BulletPrefad;
 
     //복제할 FX 원본
-    public GameObject fxPrefab;
+    private GameObject fxPrefab;
 
     public GameObject[] stageBack = new GameObject[7];
 
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     //플레이어가 마지막으로 바라본 방향
     private float Direction;
 
-    //프ㅜㄹ레이어가 바라보는 방향
+    //플레이어가 바라보는 방향
     public bool DirLeft;
     public bool DirRight;
 
@@ -47,6 +47,10 @@ public class PlayerController : MonoBehaviour
 
         //player의 SpriteRenderer을 받아옴.
         playerRenderer = this.GetComponent<SpriteRenderer>();
+
+        //resources 폴더에서 사용할 리소스를 들고옴.
+        BulletPrefad = Resources.Load("Prefab/Bullet") as GameObject;
+        fxPrefab = Resources.Load("Prefab/FX/Smoke") as GameObject;
     }
     void Start()
     {
@@ -70,23 +74,58 @@ public class PlayerController : MonoBehaviour
         //GetAxis = -1 ~ +1 사이의 값을 반환
         //GetAxisRaw = -1 or 0 or 1 의 값만을 반환
         float Hor = Input.GetAxisRaw("Horizontal");
-        
+
+        //입력받은 값으로 플레이어를 움직임
+        Movemont = new Vector3(
+        Hor * Time.deltaTime * Speed,
+        0.0f,
+        0.0f);
+
+
         //Hor 이 0이라면 멈춰있는 상태이므로 예외처리를 해준다.
         if (Hor != 0)
             Direction = Hor;
-        else
+
+        if(Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D))
         {
-            DirLeft = false;
-            DirRight = false;
+            //플레이어의 좌표가 0.0보다 작을때 플레이어만 움직인다.
+            if (transform.position.x < 0)
+            {
+                transform.position += Movemont;
+            }
+            else
+            {
+                ControllerManager.GetInstance().DirRight = true;
+                ControllerManager.GetInstance().DirLeft = false;
+            }
         }
+
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        {
+            ControllerManager.GetInstance().DirRight = false;
+            ControllerManager.GetInstance().DirLeft = true;
+            
+            //플레이어의 좌표가 -15.0 보다 클때 플레이어만 움직인다.
+            if(transform.position.x>-15.0f)
+            {
+                //실제 플레이어를 움직인다.
+                transform.position += Movemont;
+            }
+  
+        }
+
+        if (Input.GetKeyUp(KeyCode.RightArrow)|| Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            ControllerManager.GetInstance().DirRight = false;
+            ControllerManager.GetInstance().DirLeft = false;
+        }
+
 
         //플레이어가 바라보고 있는 방향에 따라 이미지 플립 설정.
         if (Direction < 0)
         {
             // playerRenderer.flipX = DirLeft = true;
             playerRenderer.flipX = DirLeft = true;
-            //실제 플레이어를 움직인다.
-            transform.position += Movemont;
         }
         else if (Direction > 0)
         {
@@ -94,13 +133,6 @@ public class PlayerController : MonoBehaviour
             DirRight = true;
         }
 
-
-
-        //입력받은 값으로 플레이어를 움직임
-        Movemont = new Vector3(
-        Hor * Time.deltaTime * Speed,
-        0.0f,
-        0.0f);
 
         //좌측 컨트롤키를 입력한다면
         if (Input.GetKey(KeyCode.LeftControl))

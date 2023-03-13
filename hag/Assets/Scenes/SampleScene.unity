@@ -586,7 +586,7 @@ Transform:
   - {fileID: 1183194468}
   - {fileID: 409552042}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1129072242
 GameObject:
@@ -796,8 +796,8 @@ GameObject:
   - component: {fileID: 1196312874}
   - component: {fileID: 1196312873}
   m_Layer: 0
-  m_Name: GameObject (1)
-  m_TagString: Untagged
+  m_Name: wall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -867,7 +867,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1497965658
 GameObject:
@@ -1065,50 +1065,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0.5
---- !u!1 &1746326779
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1746326781}
-  - component: {fileID: 1746326780}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1746326780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1746326779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01c3c09ac339f6c42aee8ccefb2972c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1746326781
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1746326779}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.528446, y: 2.314427, z: -0.55566466}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1848794946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,8 +1185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   playerRenderer: {fileID: 0}
-  BulletPrefad: {fileID: 3507618444065950660, guid: 71133a18cec6f1f45b3200c7a2056446, type: 3}
-  fxPrefab: {fileID: 1892078723244562, guid: 7a0aa3f1882a07c468d283a714a0b608, type: 3}
   stageBack:
   - {fileID: 0}
   - {fileID: 0}

@@ -369,6 +369,7 @@
 "Assets/Sprite/BackGroundController.cs"
 "Assets/Sprite/BulletController.cs"
 "Assets/Sprite/CamaraController.cs"
+"Assets/Sprite/ControllerManager.cs"
 "Assets/Sprite/MyGizmo.cs"
 "Assets/Sprite/PlayerController.cs"
 -langversion:9.0
